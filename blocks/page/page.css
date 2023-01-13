@@ -8,5 +8,6 @@
   color: white;
   background-color: black;
   max-width: 880px;
+  min-width: 320px;
   margin: 0 auto;
 }
