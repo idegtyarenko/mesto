@@ -1,0 +1,10 @@
+.button_size_l {
+  padding: 14px 64px;
+  font-size: 18px;
+  line-height: 22px;
+  background-size: 16px;
+}
+
+.button_size_l:empty {
+  height: 50px;
+}

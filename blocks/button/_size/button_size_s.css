@@ -1,0 +1,14 @@
+.button_size_s {
+  width: 24px;
+  height: 24px;
+  background-size: 10px;
+  border-width: 1px;
+}
+
+@media screen and (max-width:570px) {
+  .button_size_s {
+    width: 18px;
+    height: 18px;
+    background-size: 7.5px;
+  }
+}

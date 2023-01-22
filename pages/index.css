@@ -1,8 +1,24 @@
 @import url('../vendor/normalize.css');
 @import url('../vendor/fonts.css');
 
+
 @import url('../blocks/page/page.css');
+
+@import url('../blocks/button/button.css');
+@import url('../blocks/button/_has-border/button_has-border.css');
+@import url('../blocks/button/_size/button_size_s.css');
+@import url('../blocks/button/_size/button_size_l.css');
+
 
 @import url('../blocks/header/header.css');
 @import url('../blocks/header/__logo/header__logo.css');
 @import url('../blocks/header/__divider/header__divider.css');
+
+@import url('../blocks/profile/profile.css');
+@import url('../blocks/profile/__avatar/profile__avatar.css');
+@import url('../blocks/profile/__about/profile__about.css');
+@import url('../blocks/profile/__name-wrapper/profile__name-wrapper.css');
+@import url('../blocks/profile/__name/profile__name.css');
+@import url('../blocks/profile/__title/profile__title.css');
+@import url('../blocks/profile/__button/_role/profile__button_role_edit.css');
+@import url('../blocks/profile/__button/_role/profile__button_role_add.css');

@@ -1,0 +1,4 @@
+.profile__button_role_add {
+  flex-grow: 1;
+  background-image: url('../../../../images/icon_add.svg');
+}

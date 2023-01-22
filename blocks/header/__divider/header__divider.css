@@ -3,7 +3,7 @@
   border: 0.5px solid #545454;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 410px) {
   .header__divider {
     margin-top: 32px;
   }
