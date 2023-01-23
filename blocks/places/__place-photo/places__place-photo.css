@@ -1,0 +1,5 @@
+.places__place-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+}

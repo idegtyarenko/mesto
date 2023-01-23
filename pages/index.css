@@ -23,5 +23,11 @@
 @import url('../blocks/profile/__button/_role/profile__button_role_edit.css');
 @import url('../blocks/profile/__button/_role/profile__button_role_add.css');
 
+@import url('../blocks/places/places.css');
+@import url('../blocks/places/__place/places__place.css');
+@import url('../blocks/places/__place-photo/places__place-photo.css');
+@import url('../blocks/places/__name-wrapper/places__name-wrapper.css');
+@import url('../blocks/places/__place-name/places__place-name.css');
+
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
