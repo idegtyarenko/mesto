@@ -28,6 +28,8 @@
 @import url('../blocks/places/__place-photo/places__place-photo.css');
 @import url('../blocks/places/__name-wrapper/places__name-wrapper.css');
 @import url('../blocks/places/__place-name/places__place-name.css');
+@import url('../blocks/places/__like-icon/places__like-icon.css');
+@import url('../blocks/places/__like-icon/_active/places__like-icon_active.css');
 
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
