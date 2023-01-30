@@ -12,5 +12,7 @@
 @media screen and (max-width: 410px) {
   .button_size_l {
     background-size: 16px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }
