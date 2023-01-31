@@ -9,7 +9,7 @@ const nameField = document.querySelector('.popup__form-input_name_name');
 const titleField = document.querySelector('.popup__form-input_name_title');
 
 const togglePopup = function(evt) {
-  if (evt.target === this || evt.srcElement === form) {
+  if (evt.target === this || evt.type === 'submit') {
     if (!popup.classList.contains('popup_opened')) {
       nameField.value = name.textContent;
       titleField.value = title.textContent;
