@@ -3,6 +3,7 @@
 
 
 @import url('../blocks/page/page.css');
+@import url('../blocks/page/_popup-opened/page_popup-opened.css');
 
 @import url('../blocks/button/button.css');
 @import url('../blocks/button/_has-border/button_has-border.css');
@@ -33,3 +34,13 @@
 
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
+
+
+@import url('../blocks/popup/popup.css');
+@import url('../blocks/popup/_opened/popup_opened.css');
+@import url('../blocks/popup/__wrapper/popup__wrapper.css');
+@import url('../blocks/popup/__close-button/popup__close-button.css');
+@import url('../blocks/popup/__window/popup__window.css');
+@import url('../blocks/popup/__title/popup__title.css');
+@import url('../blocks/popup/__form-input/popup__form-input.css');
+@import url('../blocks/popup/__submit-button/popup__submit-button.css');
