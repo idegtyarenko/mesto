@@ -3,6 +3,7 @@
   font-size: 18px;
   line-height: 22px;
   background-size: 22px;
+  border-radius: 2px;
 }
 
 .button_size_l:empty {
