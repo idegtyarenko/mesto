@@ -2,15 +2,17 @@
   display: flex;
   align-items: center;
   gap: 18px;
+  max-width: 546px;
 }
 
 @media screen and (max-width:570px) {
   .profile__name-wrapper {
     gap: 10px;
+    max-width: calc(100% - 19px);
   }
 }
 
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 404px) {
   .profile__name-wrapper {
     justify-content: center;
     position: relative;
