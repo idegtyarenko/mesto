@@ -5,6 +5,8 @@
 @import url('../blocks/page/page.css');
 @import url('../blocks/page/_popup-opened/page_popup-opened.css');
 
+@import url('../blocks/main/main.css');
+
 @import url('../blocks/button/button.css');
 @import url('../blocks/button/_has-border/button_has-border.css');
 @import url('../blocks/button/_size/button_size_s.css');
