@@ -14,7 +14,11 @@ const initForm = function() {
 };
 
 const togglePopup = function(evt) {
-  if (evt.target === this || evt.type === 'submit') {
+  if (
+    evt.target === this ||
+    evt.target.classList.contains('popup__wrapper') ||
+    evt.type === 'submit'
+    ) {
     popup.classList.toggle('popup_opened');
     page.classList.toggle('page_popup-opened');
   }
