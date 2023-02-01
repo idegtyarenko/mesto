@@ -8,12 +8,13 @@ const form = document.querySelector('.form');
 const nameField = document.querySelector('.form__input_name_name');
 const titleField = document.querySelector('.form__input_name_title');
 
+const initForm = function() {
+  nameField.value = name.textContent;
+  titleField.value = title.textContent;
+};
+
 const togglePopup = function(evt) {
   if (evt.target === this || evt.type === 'submit') {
-    if (!popup.classList.contains('popup_opened')) {
-      nameField.value = name.textContent;
-      titleField.value = title.textContent;
-    }
     popup.classList.toggle('popup_opened');
     page.classList.toggle('page_popup-opened');
   }
@@ -26,6 +27,7 @@ const handleFormSubmit = function(evt) {
   togglePopup(evt);
 }
 
+initForm();
 editButton.addEventListener('click', togglePopup);
 closeButton.addEventListener('click', togglePopup);
 popup.addEventListener('click', togglePopup);
