@@ -8,23 +8,23 @@ const form = document.querySelector('.form');
 const nameField = document.querySelector('.form__input_name_name');
 const titleField = document.querySelector('.form__input_name_title');
 
-const initForm = function() {
+const initForm = function () {
   nameField.value = name.textContent;
   titleField.value = title.textContent;
 };
 
-const togglePopup = function(evt) {
+const togglePopup = function (evt) {
   if (
     evt.target === this ||
     evt.target.classList.contains('popup__wrapper') ||
     evt.type === 'submit'
-    ) {
+  ) {
     popup.classList.toggle('popup_opened');
     page.classList.toggle('page_popup-opened');
   }
 };
 
-const handleFormSubmit = function(evt) {
+const handleFormSubmit = function (evt) {
   evt.preventDefault();
   name.textContent = nameField.value;
   title.textContent = titleField.value;
