@@ -77,30 +77,28 @@
   </footer>
 
   <div class="popup">
-    <div class="popup__wrapper">
+    <div class="popup__window">
       <button class="popup__close-button" type="button" aria-label="Закрыть диалог"></button>
-      <div class="popup__window">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="form" name="edit-profile">
-          <input
-            class="form__input form__input_name_name"
-            type="text"
-            name="name"
-            placeholder="Имя"
-            required
-            >
-          <input
-            class="form__input form__input_name_title"
-            type="text"
-            name="title"
-            placeholder="Кратко о себе"
-            required
-            >
-          <button class="button button_size_l form__submit-button" type="submit">
-            Сохранить
-          </button>
-        </form>
-      </div>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="form" name="edit-profile">
+        <input
+          class="form__input form__input_name_name"
+          type="text"
+          name="name"
+          placeholder="Имя"
+          required
+          >
+        <input
+          class="form__input form__input_name_title"
+          type="text"
+          name="title"
+          placeholder="Кратко о себе"
+          required
+          >
+        <button class="button button_size_l form__submit-button" type="submit">
+          Сохранить
+        </button>
+      </form>
     </div>
   </div>
   <script src="./scripts/index.js"></script>
