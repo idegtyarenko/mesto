@@ -1,4 +1,4 @@
-.popup__form-input {
+.form__input {
   font-family: inherit;
   width: 100%;
   border: none;
@@ -8,16 +8,16 @@
   line-height: 17px;
 }
 
-.popup__form-input::placeholder {
+.form__input::placeholder {
   opacity: 0.4;
 }
 
-.popup__form-input:focus {
+.form__input:focus {
   outline: none;
   border-bottom: solid 2px black;
   padding-bottom: 9px;
 }
 
-.popup__form-input:not(:last-of-type) {
+.form__input:not(:last-of-type) {
   margin-bottom: 30px;
 }
