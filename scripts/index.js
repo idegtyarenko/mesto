@@ -29,16 +29,16 @@ let initialPlaces = [
 
 const template = document.querySelector('#place-template');
 
-const appendPlace = function (place) {
+const addPlace = function (place) {
   const placeNode = template.content.cloneNode(true);
   placeNode.querySelector('.places__place-photo').src = place.link;
   placeNode.querySelector('.places__place-name').textContent = place.name;
-  document.querySelector('.places').append(placeNode);
+  document.querySelector('.places').prepend(placeNode);
 };
 
 const initPlaces = function (places) {
   for (const place of places) {
-    appendPlace(place);
+    addPlace(place);
   }
 };
 
@@ -158,7 +158,7 @@ const placeAddForm = {
     evt.preventDefault();
     const inputName = document.querySelector('.form__input[name="name"]').value;
     const inputLink = document.querySelector('.form__input[name="image_link"]').value;
-    appendPlace({
+    addPlace({
       name: inputName,
       link: inputLink
     });
