@@ -59,41 +59,46 @@ const togglePopup = function (evt) {
   }
 };
 
+const removePopupContents = function() {
+  const popup_window = document.querySelector('.popup__window');
+  while (popup_window.children.length > 2) {
+    popup_window.removeChild(popup_window.lastChild);
+  }
+};
+
 document.querySelector('.popup__close-button').addEventListener('click', togglePopup);
 document.querySelector('.popup').addEventListener('click', togglePopup);
 
 
 // Рендер формы
 
-const renderForm = function (evt, formDescription) {
-  const popup_window = document.querySelector('.popup__window');
-  while (popup_window.children.length > 2) {
-    popup_window.removeChild(popup_window.lastChild);
+const renderField = function(fieldDescription) {
+  const field_template = document.querySelector('#field-template');
+  field = field_template.content.querySelector('.form__input').cloneNode(true);
+  field.name = fieldDescription.name;
+  field.placeholder = fieldDescription.placeholder;
+  if (fieldDescription.hasOwnProperty('defaultValue')) {
+    field.value = fieldDescription.defaultValue;
   }
+  if (fieldDescription.hasOwnProperty('type')) {
+    field.type = fieldDescription.type;
+  }
+  return field;
+};
 
+const renderForm = function (evt, formDescription) {
+  removePopupContents();
   const formHtml = document.querySelector('#form-template').content.cloneNode(true);
   formHtml.querySelector('.popup__title').textContent = formDescription.title;
   const formTag = formHtml.querySelector('.form');
   formTag.name = formDescription.name;
   formTag.querySelector('.form__submit-button').textContent = formDescription.buttonName;
   formTag.addEventListener('submit', formDescription.submitHandler);
-  popup_window.append(formHtml);
-
-  const field_template = popup_window.querySelector('#field-template');
-  for (fieldDescription of formDescription.fields) {
-    field = field_template.content.querySelector('.form__input').cloneNode(true);
-    field.name = fieldDescription.name;
-    field.placeholder = fieldDescription.placeholder;
-    if (fieldDescription.hasOwnProperty('defaultValue')) {
-      field.value = fieldDescription.defaultValue;
-    }
-    if (fieldDescription.hasOwnProperty('type')) {
-      field.type = fieldDescription.type;
-    }
-    const form = popup_window.querySelector('.form');
-    form.insertBefore(field, form.lastElementChild);
+  document.querySelector('.popup__window').append(formHtml);
+  for (field of formDescription.fields) {
+    const form = document.querySelector('.form');
+    form.insertBefore(renderField(field), form.lastElementChild);
   }
-
   togglePopup(evt);
 };
 
