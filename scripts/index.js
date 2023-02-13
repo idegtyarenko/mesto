@@ -1,6 +1,6 @@
 // Карточки мест
 
-const initialCards = [
+let initialPlaces = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -27,17 +27,22 @@ const initialCards = [
   }
 ];
 
-const initPlaces = function (cards) {
-  const template = document.querySelector('#place-template');
-  for (const card of cards) {
-    const placeNode = template.content.cloneNode(true);
-    placeNode.querySelector('.places__place-photo').src = card.link;
-    placeNode.querySelector('.places__place-name').textContent = card.name;
-    document.querySelector('.places').append(placeNode);
+const template = document.querySelector('#place-template');
+
+const appendPlace = function (place) {
+  const placeNode = template.content.cloneNode(true);
+  placeNode.querySelector('.places__place-photo').src = place.link;
+  placeNode.querySelector('.places__place-name').textContent = place.name;
+  document.querySelector('.places').append(placeNode);
+};
+
+const initPlaces = function (places) {
+  for (const place of places) {
+    appendPlace(place);
   }
 };
 
-initPlaces(initialCards);
+initPlaces(initialPlaces);
 
 
 // Попап
@@ -46,7 +51,7 @@ const togglePopup = function (evt) {
   if (
     evt.target === this ||
     evt.target.classList.contains('popup__wrapper') ||
-    evt.target.classList.contains('profile__button_role_edit') ||
+    evt.target.classList.contains('button') && ! evt.target.classList.contains('form__submit-button')  ||
     evt.type === 'submit'
   ) {
     document.querySelector('.popup').classList.toggle('popup_opened');
@@ -79,7 +84,12 @@ const renderForm = function (evt, formDescription) {
     field = field_template.content.querySelector('.form__input').cloneNode(true);
     field.name = fieldDescription.name;
     field.placeholder = fieldDescription.placeholder;
-    field.value = fieldDescription.defaultValue;
+    if (fieldDescription.hasOwnProperty('defaultValue')) {
+      field.value = fieldDescription.defaultValue;
+    }
+    if (fieldDescription.hasOwnProperty('type')) {
+      field.type = fieldDescription.type;
+    }
     const form = popup_window.querySelector('.form');
     form.insertBefore(field, form.lastElementChild);
   }
@@ -120,4 +130,37 @@ const profileEditForm = {
 
 document.querySelector('.profile__button_role_edit').addEventListener('click', (evt) => {
   renderForm(evt, profileEditForm);
+});
+
+// Форма добавления места
+
+const placeAddForm = {
+  name: 'add-place',
+  title: 'Новое место',
+  fields: [
+    {
+      name: 'name',
+      placeholder: 'Название'
+    },
+    {
+      name: 'image_link',
+      placeholder: 'Ссылка на картинку',
+      type: 'url'
+    }
+  ],
+  buttonName: 'Создать',
+  submitHandler: evt => {
+    evt.preventDefault();
+    const inputName = document.querySelector('.form__input[name="name"]').value;
+    const inputLink = document.querySelector('.form__input[name="image_link"]').value;
+    appendPlace({
+      name: inputName,
+      link: inputLink
+    });
+    togglePopup(evt);
+  }
+};
+
+document.querySelector('.profile__button_role_add').addEventListener('click', (evt) => {
+  renderForm(evt, placeAddForm);
 });
