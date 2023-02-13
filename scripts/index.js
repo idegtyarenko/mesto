@@ -137,6 +137,7 @@ document.querySelector('.profile__button_role_edit').addEventListener('click', (
   renderForm(evt, profileEditForm);
 });
 
+
 // Форма добавления места
 
 const placeAddForm = {
@@ -169,3 +170,15 @@ const placeAddForm = {
 document.querySelector('.profile__button_role_add').addEventListener('click', (evt) => {
   renderForm(evt, placeAddForm);
 });
+
+
+// Лайк карточки
+
+const toggleLike = function (evt) {
+  evt.target.classList.toggle('places__like-icon_active');
+}
+
+const like_buttons = document.querySelectorAll('.places__like-icon');
+for (btn of like_buttons) {
+  btn.addEventListener('click', toggleLike);
+}
