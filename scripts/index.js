@@ -1,4 +1,4 @@
-// Инициализируем карточки
+// Карточки мест
 
 const initialCards = [
   {
@@ -42,9 +42,6 @@ initPlaces(initialCards);
 
 // Попап
 
-const popup = document.querySelector('.popup');
-const page = document.querySelector('.page');
-
 const togglePopup = function (evt) {
   if (
     evt.target === this ||
@@ -52,38 +49,75 @@ const togglePopup = function (evt) {
     evt.target.classList.contains('profile__button_role_edit') ||
     evt.type === 'submit'
   ) {
-    popup.classList.toggle('popup_opened');
-    page.classList.toggle('page_popup-opened');
+    document.querySelector('.popup').classList.toggle('popup_opened');
+    document.querySelector('.page').classList.toggle('page_popup-opened');
   }
 };
 
-const closeButton = document.querySelector('.popup__close-button');
-closeButton.addEventListener('click', togglePopup);
-popup.addEventListener('click', togglePopup);
+document.querySelector('.popup__close-button').addEventListener('click', togglePopup);
+document.querySelector('.popup').addEventListener('click', togglePopup);
 
 
-// Форма
+// Рендер формы
 
-const name = document.querySelector('.profile__name');
-const title = document.querySelector('.profile__title');
-const form = document.querySelector('.form');
-const nameField = document.querySelector('.form__input_name_name');
-const titleField = document.querySelector('.form__input_name_title');
+const renderForm = function (evt, formDescription) {
+  const popup_window = document.querySelector('.popup__window');
+  while (popup_window.children.length > 2) {
+    popup_window.removeChild(popup_window.lastChild);
+  }
 
-const initForm = function (evt) {
-  nameField.value = name.textContent;
-  titleField.value = title.textContent;
+  const formHtml = document.querySelector('#form-template').content.cloneNode(true);
+  formHtml.querySelector('.popup__title').textContent = formDescription.title;
+  const formTag = formHtml.querySelector('.form');
+  formTag.name = formDescription.name;
+  formTag.querySelector('.form__submit-button').textContent = formDescription.buttonName;
+  formTag.addEventListener('submit', formDescription.submitHandler);
+  popup_window.append(formHtml);
+
+  const field_template = popup_window.querySelector('#field-template');
+  for (fieldDescription of formDescription.fields) {
+    field = field_template.content.querySelector('.form__input').cloneNode(true);
+    field.name = fieldDescription.name;
+    field.placeholder = fieldDescription.placeholder;
+    field.value = fieldDescription.defaultValue;
+    const form = popup_window.querySelector('.form');
+    form.insertBefore(field, form.lastElementChild);
+  }
+
   togglePopup(evt);
 };
 
-const editButton = document.querySelector('.profile__button_role_edit');
-editButton.addEventListener('click', initForm);
 
-const handleFormSubmit = function (evt) {
-  evt.preventDefault();
-  name.textContent = nameField.value;
-  title.textContent = titleField.value;
-  togglePopup(evt);
-}
+// Форма редактирования профиля
 
-form.addEventListener('submit', handleFormSubmit);
+const profileEditForm = {
+  name: 'edit-profile',
+  title: 'Редактировать профиль',
+  fields: [
+    {
+      name: 'name',
+      placeholder: 'Имя',
+      defaultValue: document.querySelector('.profile__name').textContent
+    },
+    {
+      name: 'title',
+      placeholder: 'Кратко о себе',
+      defaultValue: document.querySelector('.profile__title').textContent
+    }
+  ],
+  buttonName: 'Сохранить',
+  submitHandler: evt => {
+    evt.preventDefault();
+    const profileName = document.querySelector('.profile__name');
+    const profileTitle = document.querySelector('.profile__title');
+    const inputName = document.querySelector('.form__input[name="name"]');
+    const inputTitle = document.querySelector('.form__input[name="title"]');
+    profileName.textContent = inputName.value;
+    profileTitle.textContent = inputTitle.value;
+    togglePopup(evt);
+  }
+};
+
+document.querySelector('.profile__button_role_edit').addEventListener('click', (evt) => {
+  renderForm(evt, profileEditForm);
+});

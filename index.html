@@ -47,28 +47,18 @@
   <div class="popup">
     <div class="popup__window">
       <button class="popup__close-button" type="button" aria-label="Закрыть диалог"></button>
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="form" name="edit-profile">
-        <input
-          class="form__input form__input_name_name"
-          type="text"
-          name="name"
-          placeholder="Имя"
-          required
-          >
-        <input
-          class="form__input form__input_name_title"
-          type="text"
-          name="title"
-          placeholder="Кратко о себе"
-          required
-          >
-        <button class="button button_size_l form__submit-button" type="submit">
-          Сохранить
-        </button>
-      </form>
+      <template id="form-template">
+        <h2 class="popup__title"></h2>
+        <form class="form">
+          <template id="field-template">
+            <input class="form__input" type="text" required >
+          </template>
+          <button class="button button_size_l form__submit-button" type="submit"></button>
+        </form>
+      </template>
     </div>
   </div>
+
   <script src="./scripts/index.js"></script>
 </body>
 </html>
