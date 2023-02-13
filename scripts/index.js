@@ -45,6 +45,30 @@ const initPlaces = function (places) {
 initPlaces(initialPlaces);
 
 
+// Лайк карточки
+
+const toggleLike = function (evt) {
+  evt.target.classList.toggle('places__like-icon_active');
+}
+
+const like_buttons = document.querySelectorAll('.places__like-icon');
+for (btn of like_buttons) {
+  btn.addEventListener('click', toggleLike);
+}
+
+
+// Удаление карточки
+
+const deletePlace = function (evt) {
+  evt.target.parentNode.remove();
+}
+
+const delete_buttons = document.querySelectorAll('.places__delete-icon');
+for (btn of delete_buttons) {
+  btn.addEventListener('click', deletePlace);
+}
+
+
 // Попап
 
 const togglePopup = function (evt) {
@@ -170,15 +194,3 @@ const placeAddForm = {
 document.querySelector('.profile__button_role_add').addEventListener('click', (evt) => {
   renderForm(evt, placeAddForm);
 });
-
-
-// Лайк карточки
-
-const toggleLike = function (evt) {
-  evt.target.classList.toggle('places__like-icon_active');
-}
-
-const like_buttons = document.querySelectorAll('.places__like-icon');
-for (btn of like_buttons) {
-  btn.addEventListener('click', toggleLike);
-}
