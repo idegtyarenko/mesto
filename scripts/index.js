@@ -29,14 +29,28 @@ let initialPlaces = [
 
 const template = document.querySelector('#place-template');
 
-const addPlace = function (place) {
+function toggleLike (evt) {
+  evt.stopPropagation();
+  evt.target.classList.toggle('places__like-icon_active');
+}
+
+function deletePlace (evt) {
+  evt.stopPropagation();
+  evt.target.parentNode.remove();
+}
+
+function addPlace (place) {
   const placeNode = template.content.cloneNode(true);
   placeNode.querySelector('.places__place-photo').src = place.link;
   placeNode.querySelector('.places__place-name').textContent = place.name;
   document.querySelector('.places').prepend(placeNode);
+  const newPlace = document.querySelector('.places__place');
+  newPlace.addEventListener('click', renderLightbox);
+  newPlace.querySelector('.places__delete-icon').addEventListener('click', deletePlace);
+  newPlace.querySelector('.places__like-icon').addEventListener('click', toggleLike);
 };
 
-const initPlaces = function (places) {
+function initPlaces (places) {
   for (const place of places) {
     addPlace(place);
   }
@@ -45,33 +59,9 @@ const initPlaces = function (places) {
 initPlaces(initialPlaces);
 
 
-// Лайк карточки
-
-const toggleLike = function (evt) {
-  evt.target.classList.toggle('places__like-icon_active');
-}
-
-const like_buttons = document.querySelectorAll('.places__like-icon');
-for (btn of like_buttons) {
-  btn.addEventListener('click', toggleLike);
-}
-
-
-// Удаление карточки
-
-const deletePlace = function (evt) {
-  evt.target.parentNode.remove();
-}
-
-const delete_buttons = document.querySelectorAll('.places__delete-icon');
-for (btn of delete_buttons) {
-  btn.addEventListener('click', deletePlace);
-}
-
-
 // Попап
 
-const isCorrectClick = function (evt) {
+function isCorrectClick (evt) {
   const current = evt.currentTarget === evt.target;
   const closeButton = evt.target.classList.contains('popup__close-button');
   const submit = evt.type === 'submit';
@@ -81,14 +71,14 @@ const isCorrectClick = function (evt) {
   return current && (closeButton || submit) || outOfPopup || lightbox;
 };
 
-const togglePopup = function (evt) {
+function togglePopup (evt) {
   if (isCorrectClick(evt)) {
     document.querySelector('.popup').classList.toggle('popup_opened');
     document.querySelector('.page').classList.toggle('page_popup-opened');
   }
 };
 
-const resetPopup = function() {
+function resetPopup () {
   while (popupWindow.children.length > popupWindowInitialLength) {
     popupWindow.removeChild(popupWindow.lastChild);
   }
@@ -103,7 +93,7 @@ document.querySelector('.popup').addEventListener('click', togglePopup);
 
 // Открытие лайтбокса
 
-const renderLightbox = function(evt) {
+function renderLightbox (evt) {
   resetPopup();
 
   const template = document.querySelector('#lightbox-template');
@@ -113,19 +103,13 @@ const renderLightbox = function(evt) {
   lb.querySelector('.lightbox__image').src = src;
   lb.querySelector('.lightbox__caption').textContent = name;
   document.querySelector('.popup__window').append(lb);
-  console.log('rendering lb');
   togglePopup(evt);
 };
-
-const places = document.querySelectorAll('.places__place');
-for (place of places) {
-  place.addEventListener('click', renderLightbox);
-}
 
 
 // Открытие формы
 
-const renderField = function(fieldDescription) {
+function renderField (fieldDescription) {
   const field_template = document.querySelector('#field-template');
   field = field_template.content.querySelector('.form__input').cloneNode(true);
   field.name = fieldDescription.name;
@@ -139,7 +123,7 @@ const renderField = function(fieldDescription) {
   return field;
 };
 
-const renderForm = function (evt, formDescription) {
+function renderForm (evt, formDescription) {
   resetPopup();
   const formHtml = document.querySelector('#form-template').content.cloneNode(true);
   formHtml.querySelector('.popup__title').textContent = formDescription.title;
