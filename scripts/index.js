@@ -71,30 +71,59 @@ for (btn of delete_buttons) {
 
 // Попап
 
+const isCorrectClick = function (evt) {
+  const current = evt.currentTarget === evt.target;
+  const closeButton = evt.target.classList.contains('popup__close-button');
+  const submit = evt.type === 'submit';
+  const outOfPopup = !evt.target.closest('.popup__window');
+  const lightbox = evt.target.classList.contains('lightbox__image');
+
+  return current && (closeButton || submit) || outOfPopup || lightbox;
+};
+
 const togglePopup = function (evt) {
-  if (
-    evt.target === this ||
-    evt.target.classList.contains('popup__wrapper') ||
-    evt.target.classList.contains('button') && ! evt.target.classList.contains('form__submit-button')  ||
-    evt.type === 'submit'
-  ) {
+  if (isCorrectClick(evt)) {
     document.querySelector('.popup').classList.toggle('popup_opened');
     document.querySelector('.page').classList.toggle('page_popup-opened');
   }
 };
 
-const removePopupContents = function() {
-  const popup_window = document.querySelector('.popup__window');
-  while (popup_window.children.length > 2) {
-    popup_window.removeChild(popup_window.lastChild);
+const resetPopup = function() {
+  while (popupWindow.children.length > popupWindowInitialLength) {
+    popupWindow.removeChild(popupWindow.lastChild);
   }
+  document.querySelector('.popup__window').classList.remove('popup__window_type_form');
 };
 
+const popupWindow = document.querySelector('.popup__window');
+const popupWindowInitialLength = popupWindow.children.length;
 document.querySelector('.popup__close-button').addEventListener('click', togglePopup);
 document.querySelector('.popup').addEventListener('click', togglePopup);
 
 
-// Рендер формы
+// Открытие лайтбокса
+
+const renderLightbox = function(evt) {
+  resetPopup();
+
+  const template = document.querySelector('#lightbox-template');
+  lb = template.content.querySelector('.lightbox').cloneNode(true);
+  const name = evt.target.parentNode.querySelector('.places__place-name').textContent;
+  const src = evt.target.parentNode.querySelector('.places__place-photo').src;
+  lb.querySelector('.lightbox__image').src = src;
+  lb.querySelector('.lightbox__caption').textContent = name;
+  document.querySelector('.popup__window').append(lb);
+  console.log('rendering lb');
+  togglePopup(evt);
+};
+
+const places = document.querySelectorAll('.places__place');
+for (place of places) {
+  place.addEventListener('click', renderLightbox);
+}
+
+
+// Открытие формы
 
 const renderField = function(fieldDescription) {
   const field_template = document.querySelector('#field-template');
@@ -111,14 +140,16 @@ const renderField = function(fieldDescription) {
 };
 
 const renderForm = function (evt, formDescription) {
-  removePopupContents();
+  resetPopup();
   const formHtml = document.querySelector('#form-template').content.cloneNode(true);
   formHtml.querySelector('.popup__title').textContent = formDescription.title;
   const formTag = formHtml.querySelector('.form');
   formTag.name = formDescription.name;
   formTag.querySelector('.form__submit-button').textContent = formDescription.buttonName;
   formTag.addEventListener('submit', formDescription.submitHandler);
-  document.querySelector('.popup__window').append(formHtml);
+  const popupWindow = document.querySelector('.popup__window');
+  popupWindow.append(formHtml);
+  popupWindow.classList.add('popup__window_type_form');
   for (field of formDescription.fields) {
     const form = document.querySelector('.form');
     form.insertBefore(renderField(field), form.lastElementChild);
