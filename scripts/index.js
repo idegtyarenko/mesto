@@ -37,15 +37,23 @@ function deletePlace (evt) {
   evt.target.parentNode.remove();
 }
 
-function addPlace (placeObj) {
+function buildPlace (placeObj) {
   const placeNode = document.querySelector('#place-template').content.cloneNode(true);
   placeNode.querySelector('.places__place-photo').src = placeObj.link;
   placeNode.querySelector('.places__place-name').textContent = placeObj.name;
-  document.querySelector('.places').prepend(placeNode);
-  const newPlace = document.querySelector('.places__place');
-  newPlace.addEventListener('click', openLightbox);
-  newPlace.querySelector('.places__delete-icon').addEventListener('click', deletePlace);
-  newPlace.querySelector('.places__like-icon').addEventListener('click', toggleLike);
+  return placeNode;
+}
+
+function initPlace (placeElement) {
+  placeElement.addEventListener('click', openLightbox);
+  placeElement.querySelector('.places__delete-icon').addEventListener('click', deletePlace);
+  placeElement.querySelector('.places__like-icon').addEventListener('click', toggleLike);
+}
+
+function addPlace (placeObj) {
+  newPlace = buildPlace(placeObj);
+  document.querySelector('.places').prepend(newPlace);
+  initPlace(document.querySelector('.places__place'));
 };
 
 function initPlaces (placesArray) {
