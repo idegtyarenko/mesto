@@ -46,24 +46,29 @@
   </footer>
 
   <div class="popup">
-    <div class="popup__window">
+    <div id="edit-profile" class="popup__window popup__window_type_dialog">
       <button class="popup__close-button" type="button" aria-label="Закрыть диалог"></button>
-      <template id="form-template">
-        <h2 class="popup__title"></h2>
-        <form class="form">
-          <template id="field-template">
-            <input class="form__input" type="text" required >
-          </template>
-          <button class="button button_size_l form__submit-button" type="submit"></button>
-        </form>
-      </template>
-      <template id="lightbox-template">
-        <figure class="lightbox">
-          <img class="lightbox__image">
-          <figcaption class="lightbox__caption"></figcaption>
-        </figure>
-      </template>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="form" name="edit-profile">
+        <input class="form__input" type="text" name="user_name" placeholder="Имя" required>
+        <input class="form__input" type="text" name="title" placeholder="Кратко о себе" required>
+        <button class="button button_size_l form__submit-button" type="submit">Сохранить</button>
+      </form>
     </div>
+    <div id="add-place" class="popup__window popup__window_type_dialog">
+      <button class="popup__close-button" type="button" aria-label="Закрыть диалог"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="form" name="add-place">
+        <input class="form__input" type="text" name="place_name" placeholder="Название" required>
+        <input class="form__input" type="url" name="image_link" placeholder="Ссылка на картинку" required>
+        <button class="button button_size_l form__submit-button" type="submit">Создать</button>
+      </form>
+    </div>
+    <figure id="lightbox" class="popup__window popup__window_type_lightbox">
+      <button class="popup__close-button" type="button" aria-label="Закрыть диалог"></button>
+      <img class="popup__lightbox-image">
+      <figcaption class="popup__lightbox-caption"></figcaption>
+    </figure>
   </div>
 
   <script src="./scripts/index.js"></script>

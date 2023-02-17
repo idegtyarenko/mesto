@@ -1,4 +1,5 @@
 .popup__window {
+  display: none;
   position: relative;
 }
 
