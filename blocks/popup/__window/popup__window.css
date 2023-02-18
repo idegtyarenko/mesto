@@ -1,6 +1,6 @@
 .popup__window {
-  display: none;
   position: relative;
+  z-index: 3;
 }
 
 @media screen and (max-width: 538px) {

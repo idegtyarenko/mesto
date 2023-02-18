@@ -1,3 +1,9 @@
+const page = document.querySelector('.page');
+const lightbox = document.querySelector('#lightbox');
+const editProfilePopup = document.querySelector('#edit-profile');
+const addPlacePopup = document.querySelector('#add-place');
+const addPlaceForm = addPlacePopup.querySelector('.form');
+
 // Карточки мест
 
 const initialPlaces = [
@@ -67,62 +73,48 @@ initPlaces(initialPlaces);
 
 // Попап
 
-const popupElement = document.querySelector('.popup');
+function openPopup (popup) {
+  popup.classList.add('popup_opened');
+  page.classList.add('page_popup-opened');
 
-function isCorrectClick (evt) {
-  const current = evt.currentTarget === evt.target;
-  const closeButton = evt.target.classList.contains('popup__close-button');
-  const submit = evt.type === 'submit';
-  const outOfPopup = !evt.target.closest('.popup__window');
-  const lightbox = evt.target.classList.contains('popup__lightbox-image');
-
-  return current && (closeButton || submit) || outOfPopup || lightbox;
-};
-
-function togglePopup () {
-    popupElement.classList.toggle('popup_opened');
-    document.querySelector('.page').classList.toggle('page_popup-opened');
-};
-
-function openPopup (id) {
-  popupWindow = document.querySelector('#' + id);
-  popupWindow.classList.add('popup__window_visible');
-  togglePopup();
-
-  firstInput = popupWindow.querySelector('.form__input');
+  firstInput = popup.querySelector('.form__input');
   if (firstInput) {
     firstInput.focus();
   }
 }
 
 function closePopup (evt) {
-  if (isCorrectClick(evt)) {
-    togglePopup();
-    for (item of popupElement.children) {
-      item.classList.remove('popup__window_visible');
-    }
-  }
+    const popup = evt.target.closest('.popup');
+    popup.classList.remove('popup_opened');
+    page.classList.remove('page_popup-opened');
+    evt.stopPropagation();
 };
 
-function initPopup () {
-  popupElement.addEventListener('click', closePopup);
-  for (btn of popupElement.querySelectorAll('.popup__close-button')) {
-    btn.addEventListener('click', closePopup);
+function initPopups () {
+  const popups = document.querySelectorAll('.popup');
+  for (const popup of popups) {
+    popup.addEventListener('click', (evt) => {
+      if (evt.currentTarget === evt.target) {
+        closePopup(evt);
+      }
+    });
+    for (const element of popup.querySelectorAll('.popup__close')) {
+      element.addEventListener('click', closePopup);
+    }
   }
 }
 
-initPopup();
+initPopups();
 
 
 // Открытие лайтбокса
 
 function openLightbox (evt) {
-  const lb = document.querySelector('#lightbox');
   const name = evt.target.parentNode.querySelector('.places__place-name').textContent;
   const src = evt.target.parentNode.querySelector('.places__place-photo').src;
-  lb.querySelector('.popup__lightbox-image').src = src;
-  lb.querySelector('.popup__lightbox-caption').textContent = name;
-  openPopup('lightbox');
+  lightbox.querySelector('.popup__lightbox-image').src = src;
+  lightbox.querySelector('.popup__lightbox-caption').textContent = name;
+  openPopup(lightbox);
 };
 
 
@@ -133,10 +125,10 @@ const profileTitle = document.querySelector('.profile__title');
 const inputName = document.querySelector('.form__input[name="user_name"]');
 const inputTitle = document.querySelector('.form__input[name="title"]');
 
-function openProfileEditForm (evt) {
+function openProfileEditForm () {
   inputName.value = profileName.textContent;
   inputTitle.value = profileTitle.textContent;
-  openPopup('edit-profile');
+  openPopup(editProfilePopup);
 }
 
 document.querySelector('.profile__button_role_edit').addEventListener('click', openProfileEditForm);
@@ -153,11 +145,9 @@ document.querySelector('#edit-profile form').addEventListener('submit', submitPr
 
 // Форма добавления места
 
-const addPlaceForm = document.querySelector('#add-place form');
-
 document.querySelector('.profile__button_role_add').addEventListener('click', () => {
   addPlaceForm.reset();
-  openPopup('add-place');
+  openPopup(addPlacePopup);
 });
 
 function submitAddPlaceForm (evt) {
@@ -171,4 +161,4 @@ function submitAddPlaceForm (evt) {
   closePopup(evt);
 }
 
-addPlaceForm.addEventListener('submit', submitAddPlaceForm);
+addPlacePopup.addEventListener('submit', submitAddPlaceForm);

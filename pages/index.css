@@ -18,7 +18,6 @@
 @import url('../blocks/popup/__window/popup__window.css');
 @import url('../blocks/popup/__window/_type/popup__window_type_dialog.css');
 @import url('../blocks/popup/__window/_type/popup__window_type_lightbox.css');
-@import url('../blocks/popup/__window/_visible/popup__window_visible.css');
 @import url('../blocks/popup/__title/popup__title.css');
 @import url('../blocks/popup/__lightbox-image/popup__lightbox-image.css');
 @import url('../blocks/popup/__lightbox-caption/popup__lightbox-caption.css');

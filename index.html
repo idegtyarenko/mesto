@@ -45,9 +45,9 @@
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
-    <div id="edit-profile" class="popup__window popup__window_type_dialog">
-      <button class="popup__close-button" type="button" aria-label="Закрыть диалог"></button>
+  <div id="edit-profile" class="popup">
+    <div class="popup__window popup__window_type_dialog">
+      <button class="popup__close-button popup__close" type="button" aria-label="Закрыть диалог"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="form" name="edit-profile">
         <input class="form__input" type="text" name="user_name" placeholder="Имя" required>
@@ -55,8 +55,10 @@
         <button class="button button_size_l form__submit-button" type="submit">Сохранить</button>
       </form>
     </div>
-    <div id="add-place" class="popup__window popup__window_type_dialog">
-      <button class="popup__close-button" type="button" aria-label="Закрыть диалог"></button>
+  </div>
+  <div id="add-place" class="popup">
+    <div class="popup__window popup__window_type_dialog">
+      <button class="popup__close-button popup__close" type="button" aria-label="Закрыть диалог"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="form" name="add-place">
         <input class="form__input" type="text" name="place_name" placeholder="Название" required>
@@ -64,9 +66,11 @@
         <button class="button button_size_l form__submit-button" type="submit">Создать</button>
       </form>
     </div>
-    <figure id="lightbox" class="popup__window popup__window_type_lightbox">
-      <button class="popup__close-button" type="button" aria-label="Закрыть диалог"></button>
-      <img class="popup__lightbox-image">
+  </div>
+  <div id="lightbox" class="popup">
+    <figure class="popup__window popup__window_type_lightbox">
+      <button class="popup__close-button popup__close" type="button" aria-label="Закрыть диалог"></button>
+      <img class="popup__lightbox-image popup__close">
       <figcaption class="popup__lightbox-caption"></figcaption>
     </figure>
   </div>
