@@ -85,11 +85,6 @@ initPlaces(initialPlaces);
 function openPopup (popup) {
   popup.classList.add('popup_opened');
   page.classList.add('page_popup-opened');
-
-  const firstInput = popup.querySelector('.form__input');
-  if (firstInput) {
-    firstInput.focus();
-  }
 }
 
 function closePopup (evt, popupNode) {
@@ -134,12 +129,20 @@ function openLightbox (evt) {
 };
 
 
+// Формы
+
+function openForm(element) {
+  openPopup(element);
+  element.querySelector('.form__input').focus();
+}
+
+
 // Форма редактирования профиля
 
 function openProfileEditForm () {
   inputUserName.value = profileName.textContent;
   inputTitle.value = profileTitle.textContent;
-  openPopup(editProfilePopup);
+  openForm(editProfilePopup);
 }
 
 document.querySelector('.profile__button_role_edit').addEventListener('click', openProfileEditForm);
@@ -158,7 +161,7 @@ document.querySelector('#edit-profile form').addEventListener('submit', submitPr
 
 document.querySelector('.profile__button_role_add').addEventListener('click', () => {
   addPlaceForm.reset();
-  openPopup(addPlacePopup);
+  openForm(addPlacePopup);
 });
 
 function submitAddPlaceForm (evt) {
