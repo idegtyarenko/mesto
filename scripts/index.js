@@ -39,6 +39,8 @@ const addPlaceForm = addPlacePopup.querySelector('.form');
 const inputPlaceName = addPlaceForm.querySelector('.form__input[name="place_name"]');
 const inputLink = addPlaceForm.querySelector('.form__input[name="image_link"]');
 const lightbox = document.querySelector('#lightbox');
+const lightboxImage = lightbox.querySelector('.popup__lightbox-image');
+const lightboxCaption = lightbox.querySelector('.popup__lightbox-caption');
 
 // Карточки мест
 
@@ -122,9 +124,9 @@ initPopups();
 function openLightbox (evt) {
   const name = evt.target.closest('.places__place').querySelector('.places__place-name').textContent;
   const src = evt.target.closest('.places__place').querySelector('.places__place-photo').src;
-  lightbox.querySelector('.popup__lightbox-image').src = src;
-  lightbox.querySelector('.popup__lightbox-image').alt = 'Фотография места: ' + name;
-  lightbox.querySelector('.popup__lightbox-caption').textContent = name;
+  lightboxImage.src = src;
+  lightboxImage.alt = 'Фотография места: ' + name;
+  lightboxCaption.textContent = name;
   openPopup(lightbox);
 };
 
