@@ -1,11 +1,3 @@
-const page = document.querySelector('.page');
-const lightbox = document.querySelector('#lightbox');
-const editProfilePopup = document.querySelector('#edit-profile');
-const addPlacePopup = document.querySelector('#add-place');
-const addPlaceForm = addPlacePopup.querySelector('.form');
-
-// Карточки мест
-
 const initialPlaces = [
   {
     name: 'Архыз',
@@ -33,6 +25,23 @@ const initialPlaces = [
   }
 ];
 
+const page = document.querySelector('.page');
+const profileName = page.querySelector('.profile__name');
+const profileTitle = page.querySelector('.profile__title');
+const places = document.querySelector('.places');
+const placeTemplate = places.querySelector('#place-template');
+const popups = document.querySelectorAll('.popup');
+const editProfilePopup = document.querySelector('#edit-profile');
+const inputUserName = editProfilePopup.querySelector('.form__input[name="user_name"]');
+const inputTitle = editProfilePopup.querySelector('.form__input[name="title"]');
+const addPlacePopup = document.querySelector('#add-place');
+const addPlaceForm = addPlacePopup.querySelector('.form');
+const inputPlaceName = addPlaceForm.querySelector('.form__input[name="place_name"]');
+const inputLink = addPlaceForm.querySelector('.form__input[name="image_link"]');
+const lightbox = document.querySelector('#lightbox');
+
+// Карточки мест
+
 function toggleLike (evt) {
   evt.stopPropagation();
   evt.target.classList.toggle('places__like-icon_active');
@@ -50,11 +59,11 @@ function initPlace (placeElement) {
 }
 
 function addPlace (placeObj) {
-  const placeNode = document.querySelector('#place-template').content.cloneNode(true);
+  const placeNode = placeTemplate.content.cloneNode(true);
   placeNode.querySelector('.places__place-photo').src = placeObj.link;
   placeNode.querySelector('.places__place-name').textContent = placeObj.name;
   initPlace(placeNode);
-  document.querySelector('.places').prepend(placeNode);
+  places.prepend(placeNode);
 };
 
 function initPlaces (placesArray) {
@@ -72,7 +81,7 @@ function openPopup (popup) {
   popup.classList.add('popup_opened');
   page.classList.add('page_popup-opened');
 
-  firstInput = popup.querySelector('.form__input');
+  const firstInput = popup.querySelector('.form__input');
   if (firstInput) {
     firstInput.focus();
   }
@@ -86,7 +95,6 @@ function closePopup (evt) {
 };
 
 function initPopups () {
-  const popups = document.querySelectorAll('.popup');
   for (const popup of popups) {
     popup.addEventListener('click', (evt) => {
       if (evt.currentTarget === evt.target) {
@@ -115,13 +123,8 @@ function openLightbox (evt) {
 
 // Форма редактирования профиля
 
-const profileName = document.querySelector('.profile__name');
-const profileTitle = document.querySelector('.profile__title');
-const inputName = document.querySelector('.form__input[name="user_name"]');
-const inputTitle = document.querySelector('.form__input[name="title"]');
-
 function openProfileEditForm () {
-  inputName.value = profileName.textContent;
+  inputUserName.value = profileName.textContent;
   inputTitle.value = profileTitle.textContent;
   openPopup(editProfilePopup);
 }
@@ -130,7 +133,7 @@ document.querySelector('.profile__button_role_edit').addEventListener('click', o
 
 function submitProfileEditForm (evt) {
   evt.preventDefault();
-  profileName.textContent = inputName.value;
+  profileName.textContent = inputUserName.value;
   profileTitle.textContent = inputTitle.value;
   closePopup(evt);
 }
@@ -147,11 +150,9 @@ document.querySelector('.profile__button_role_add').addEventListener('click', ()
 
 function submitAddPlaceForm (evt) {
   evt.preventDefault();
-  const inputName = document.querySelector('.form__input[name="place_name"]').value;
-  const inputLink = document.querySelector('.form__input[name="image_link"]').value;
   addPlace({
-    name: inputName,
-    link: inputLink
+    name: inputPlaceName.value,
+    link: inputLink.value
   });
   closePopup(evt);
 }
