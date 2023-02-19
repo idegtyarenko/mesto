@@ -99,7 +99,7 @@ function closePopup (evt, popupNode) {
 
 function initPopups () {
   for (const popup of popups) {
-    popup.addEventListener('click', (evt) => {
+    popup.addEventListener('mousedown', (evt) => {
       if (evt.currentTarget === evt.target) {
         closePopup(evt);
       }
