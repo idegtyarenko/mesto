@@ -49,7 +49,7 @@ function toggleLike (evt) {
 
 function deletePlace (evt) {
   evt.stopPropagation();
-  evt.target.parentNode.remove();
+  evt.target.closest('.places__place').remove();
 }
 
 function initPlace (placeElement) {
@@ -121,8 +121,8 @@ initPopups();
 // Открытие лайтбокса
 
 function openLightbox (evt) {
-  const name = evt.target.parentNode.querySelector('.places__place-name').textContent;
-  const src = evt.target.parentNode.querySelector('.places__place-photo').src;
+  const name = evt.target.closest('.places__place').querySelector('.places__place-name').textContent;
+  const src = evt.target.closest('.places__place').querySelector('.places__place-photo').src;
   lightbox.querySelector('.popup__lightbox-image').src = src;
   lightbox.querySelector('.popup__lightbox-image').alt = 'Фотография места: ' + name;
   lightbox.querySelector('.popup__lightbox-caption').textContent = name;
