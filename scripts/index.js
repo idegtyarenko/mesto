@@ -58,13 +58,17 @@ function initPlace (placeElement) {
   placeElement.querySelector('.places__like-icon').addEventListener('click', toggleLike);
 }
 
-function addPlace (placeObj) {
+function buildPlace (placeObj) {
   const placeNode = placeTemplate.content.cloneNode(true);
   placeNode.querySelector('.places__place-photo').src = placeObj.link;
   placeNode.querySelector('.places__place-photo').alt = 'Фотография места: ' + placeObj.name;
   placeNode.querySelector('.places__place-name').textContent = placeObj.name;
   initPlace(placeNode);
-  places.prepend(placeNode);
+  return placeNode;
+}
+
+function addPlace (placeObj) {
+  places.prepend(buildPlace(placeObj));
 };
 
 function initPlaces (placesArray) {
