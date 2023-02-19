@@ -61,6 +61,7 @@ function initPlace (placeElement) {
 function addPlace (placeObj) {
   const placeNode = placeTemplate.content.cloneNode(true);
   placeNode.querySelector('.places__place-photo').src = placeObj.link;
+  placeNode.querySelector('.places__place-photo').alt = 'Фотография места: ' + placeObj.name;
   placeNode.querySelector('.places__place-name').textContent = placeObj.name;
   initPlace(placeNode);
   places.prepend(placeNode);
@@ -123,6 +124,7 @@ function openLightbox (evt) {
   const name = evt.target.parentNode.querySelector('.places__place-name').textContent;
   const src = evt.target.parentNode.querySelector('.places__place-photo').src;
   lightbox.querySelector('.popup__lightbox-image').src = src;
+  lightbox.querySelector('.popup__lightbox-image').alt = 'Фотография места: ' + name;
   lightbox.querySelector('.popup__lightbox-caption').textContent = name;
   openPopup(lightbox);
 };
