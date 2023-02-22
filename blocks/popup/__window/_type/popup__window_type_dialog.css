@@ -1,6 +1,7 @@
 .popup__window_type_dialog {
   background-color: white;
   box-sizing: border-box;
+  width: 100%;
   max-width: 430px;
   border-radius: 10px;
   padding: 34px 36px 37px;
