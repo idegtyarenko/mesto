@@ -49,6 +49,7 @@ const popupAddPlace = document.querySelector('#add-place-popup');
 const formAddPlace = document.forms['add-place'];
 const inputPlaceName = formAddPlace.elements['place-name'];
 const inputLink = formAddPlace.elements['image-link'];
+const formAddPlaceSubmitButton = formAddPlace.querySelector('.form__submit-button');
 const lightboxPopup = document.querySelector('#lightbox-popup');
 const lightboxImage = lightboxPopup.querySelector('.lightbox__image');
 const lightboxCaption = lightboxPopup.querySelector('.lightbox__caption');
@@ -171,6 +172,7 @@ const forms = {
     popupElement: popupAddPlace,
     initFunction: () => {
       formAddPlace.reset();
+      formAddPlaceSubmitButton.classList.add(validationParams.inactiveButtonClass);
     },
     submitFunction: () => {
       addPlace({
