@@ -45,6 +45,7 @@ const lightboxPopup = document.querySelector('#lightbox-popup');
 const lightboxImage = lightboxPopup.querySelector('.lightbox__image');
 const lightboxCaption = lightboxPopup.querySelector('.lightbox__caption');
 
+
 // Карточки мест
 
 function toggleLike (evt) {
@@ -142,64 +143,70 @@ function openLightbox (evt) {
 };
 
 
-// Формы
+// Объявление форм
 
-function openForm(element) {
-  openPopup(element);
-  element.querySelector('.form__input').focus();
+const forms = {
+  'edit-profile': {
+    openingElementSelector: '.profile__button_role_edit',
+    popupElement: popupEditProfile,
+    initFunction: () => {
+      inputUserName.value = profileName.textContent;
+      inputTitle.value = profileTitle.textContent;
+    },
+    submitFunction: () => {
+      profileName.textContent = inputUserName.value;
+      profileTitle.textContent = inputTitle.value;
+    }
+  },
+  'add-place': {
+    openingElementSelector: '.profile__button_role_add',
+    popupElement: popupAddPlace,
+    initFunction: () => {
+      formAddPlace.reset();
+    },
+    submitFunction: () => {
+      addPlace({
+        name: inputPlaceName.value,
+        link: inputLink.value
+      });
+    }
+  }
 }
 
 
-// Форма редактирования профиля
+// Открытие форм
 
-function openProfileEditForm () {
-  inputUserName.value = profileName.textContent;
-  inputTitle.value = profileTitle.textContent;
-  openForm(popupEditProfile);
+function addFormOpenListeners () {
+  for (const formElement of document.forms) {
+    const formDescription = forms[formElement.name];
+    document.querySelector(formDescription.openingElementSelector).addEventListener('click', () => {
+      formDescription.initFunction();
+      openPopup(formDescription.popupElement);
+      formDescription.popupElement.querySelector('.form__input').focus();
+    });
+  }
 }
 
-document.querySelector('.profile__button_role_edit').addEventListener('click', openProfileEditForm);
-
-function submitProfileEditForm (evt) {
-  evt.preventDefault();
-  profileName.textContent = inputUserName.value;
-  profileTitle.textContent = inputTitle.value;
-  closePopup(evt);
-}
-
-formEditProfile.addEventListener('submit', submitProfileEditForm);
+addFormOpenListeners();
 
 
-// Форма добавления места
-
-document.querySelector('.profile__button_role_add').addEventListener('click', () => {
-  formAddPlace.reset();
-  openForm(popupAddPlace);
-});
-
-function submitAddPlaceForm (evt) {
-  evt.preventDefault();
-  addPlace({
-    name: inputPlaceName.value,
-    link: inputLink.value
-  });
-  closePopup(evt);
-}
-
-popupAddPlace.addEventListener('submit', submitAddPlaceForm);
-
-
-// Валидация форм
+// Валидация и применение форм
 
 function enableValidation (params) {
-
+  for (const formElement of document.forms) {
+    const formDescription = forms[formElement.name];
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      formDescription.submitFunction();
+      closePopup(evt);
+    })
+  }
 }
 
 enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonClass: 'button_state_disabled',
+  inputErrorClass: 'form__input_state_invalid',
+  errorIdPostfix: '-error'
 });
