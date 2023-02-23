@@ -183,6 +183,10 @@ addPlacePopup.addEventListener('submit', submitAddPlaceForm);
 
 // Валидация форм
 
+function enableValidation (params) {
+
+}
+
 enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
