@@ -2,9 +2,3 @@
   position: relative;
   z-index: 3;
 }
-
-@media screen and (max-width: 538px) {
-  .popup__window {
-    padding: 25px 22px;
-  }
-}

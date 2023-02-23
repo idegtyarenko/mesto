@@ -45,67 +45,65 @@
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
 
-  <div id="edit-profile" class="popup">
-    <div class="popup__window popup__window_type_dialog">
+  <div id="edit-profile-popup" class="popup">
+    <form class="popup__window form" name="edit-profile">
       <button class="popup__close-button popup__close" type="button" aria-label="Закрыть диалог"></button>
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="form" name="edit-profile">
-        <input
-          class="form__input"
-          type="text"
-          name="user-name"
-          placeholder="Имя"
-          required
-          minlength="2"
-          maxlength="40"
-          >
-        <p class="form__input-error" id="user_name-error"></p>
-        <input
-          class="form__input"
-          type="text"
-          name="title"
-          placeholder="Кратко о себе"
-          required
-          minlength="2"
-          maxlength="200"
-          >
-        <p class="form__input-error" id="title-error"></p>
-        <button class="button button_size_l form__submit-button" type="submit">Сохранить</button>
-      </form>
-    </div>
+      <h2 class="form__title">Редактировать профиль</h2>
+      <input
+        class="form__input"
+        type="text"
+        name="user-name"
+        placeholder="Имя"
+        required
+        minlength="2"
+        maxlength="40"
+        >
+      <p class="form__input-error" id="user_name-error"></p>
+      <input
+        class="form__input"
+        type="text"
+        name="title"
+        placeholder="Кратко о себе"
+        required
+        minlength="2"
+        maxlength="200"
+        >
+      <p class="form__input-error" id="title-error"></p>
+      <button class="button button_size_l form__submit-button" type="submit">Сохранить</button>
+    </form>
   </div>
-  <div id="add-place" class="popup">
-    <div class="popup__window popup__window_type_dialog">
+
+  <div id="add-place-popup" class="popup">
+    <form class="popup__window form" name="add-place">
       <button class="popup__close-button popup__close" type="button" aria-label="Закрыть диалог"></button>
-      <h2 class="popup__title">Новое место</h2>
-      <form class="form" name="add-place">
-        <input
-          class="form__input"
-          type="text"
-          name="place-name"
-          placeholder="Название"
-          required
-          minlength="2"
-          maxlength="30"
-          >
-        <p class="form__input-error" id="place_name-error"></p>
-        <input
-          class="form__input"
-          type="url"
-          name="image-link"
-          placeholder="Ссылка на картинку"
-          required
-          >
-        <p class="form__input-error" id="image_link-error"></p>
-        <button class="button button_size_l form__submit-button" type="submit">Создать</button>
-      </form>
-    </div>
+      <h2 class="form__title">Новое место</h2>
+      <input
+        class="form__input"
+        type="text"
+        name="place-name"
+        placeholder="Название"
+        required
+        minlength="2"
+        maxlength="30"
+        >
+      <p class="form__input-error" id="place_name-error"></p>
+      <input
+        class="form__input"
+        type="url"
+        name="image-link"
+        placeholder="Ссылка на картинку"
+        required
+        >
+      <p class="form__input-error" id="image_link-error"></p>
+      <button class="button button_size_l form__submit-button" type="submit">Создать</button>
+    </form>
   </div>
-  <div id="lightbox" class="popup">
-    <figure class="popup__window popup__window_type_lightbox">
+
+  <div id="lightbox-popup" class="popup">
+    <figure class="popup__window lightbox">
       <button class="popup__close-button popup__close" type="button" aria-label="Закрыть диалог"></button>
-      <img class="popup__lightbox-image popup__close">
-      <figcaption class="popup__lightbox-caption"></figcaption>
+      <img class="lightbox__image popup__close">
+      <figcaption class="lightbox__caption"></figcaption>
     </figure>
   </div>
 

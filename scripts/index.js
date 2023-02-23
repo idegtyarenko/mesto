@@ -33,17 +33,17 @@ const profileTitle = page.querySelector('.profile__title');
 const places = document.querySelector('.places');
 const placeTemplate = places.querySelector('#place-template');
 const popups = document.querySelectorAll('.popup');
-const editProfilePopup = document.querySelector('#edit-profile');
+const popupEditProfile = document.querySelector('#edit-profile-popup');
 const formEditProfile = document.forms['edit-profile'];
 const inputUserName = formEditProfile.elements['user-name'];
 const inputTitle = formEditProfile.elements.title;
-const addPlacePopup = document.querySelector('#add-place');
-const addPlaceForm = document.forms['add-place'];
-const inputPlaceName = addPlaceForm.elements['place-name'];
-const inputLink = addPlaceForm.elements['image-link'];
-const lightbox = document.querySelector('#lightbox');
-const lightboxImage = lightbox.querySelector('.popup__lightbox-image');
-const lightboxCaption = lightbox.querySelector('.popup__lightbox-caption');
+const popupAddPlace = document.querySelector('#add-place-popup');
+const formAddPlace = document.forms['add-place'];
+const inputPlaceName = formAddPlace.elements['place-name'];
+const inputLink = formAddPlace.elements['image-link'];
+const lightboxPopup = document.querySelector('#lightbox-popup');
+const lightboxImage = lightboxPopup.querySelector('.lightbox__image');
+const lightboxCaption = lightboxPopup.querySelector('.lightbox__caption');
 
 // Карточки мест
 
@@ -130,7 +130,7 @@ function openLightbox (evt) {
   lightboxImage.src = src;
   lightboxImage.alt = 'Фотография места: ' + name;
   lightboxCaption.textContent = name;
-  openPopup(lightbox);
+  openPopup(lightboxPopup);
 };
 
 
@@ -147,7 +147,7 @@ function openForm(element) {
 function openProfileEditForm () {
   inputUserName.value = profileName.textContent;
   inputTitle.value = profileTitle.textContent;
-  openForm(editProfilePopup);
+  openForm(popupEditProfile);
 }
 
 document.querySelector('.profile__button_role_edit').addEventListener('click', openProfileEditForm);
@@ -159,14 +159,14 @@ function submitProfileEditForm (evt) {
   closePopup(evt);
 }
 
-document.querySelector('#edit-profile form').addEventListener('submit', submitProfileEditForm);
+formEditProfile.addEventListener('submit', submitProfileEditForm);
 
 
 // Форма добавления места
 
 document.querySelector('.profile__button_role_add').addEventListener('click', () => {
-  addPlaceForm.reset();
-  openForm(addPlacePopup);
+  formAddPlace.reset();
+  openForm(popupAddPlace);
 });
 
 function submitAddPlaceForm (evt) {
@@ -178,7 +178,7 @@ function submitAddPlaceForm (evt) {
   closePopup(evt);
 }
 
-addPlacePopup.addEventListener('submit', submitAddPlaceForm);
+popupAddPlace.addEventListener('submit', submitAddPlaceForm);
 
 
 // Валидация форм
