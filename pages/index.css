@@ -11,6 +11,8 @@
 @import url('../blocks/button/_has-border/button_has-border.css');
 @import url('../blocks/button/_size/button_size_s.css');
 @import url('../blocks/button/_size/button_size_l.css');
+@import url('../blocks/button/_type/button_type_icon.css');
+@import url('../blocks/button/_type/button_type_text.css');
 @import url('../blocks/button/_state/button_state_disabled.css');
 
 @import url('../blocks/popup/popup.css');

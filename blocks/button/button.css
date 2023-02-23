@@ -1,15 +1,7 @@
 .button {
-  background-color: black;
-  color: white;
   border: none;
-  background-repeat: no-repeat;
-  background-position: center;
   cursor: pointer;
   transition: background-color 100ms ease, opacity 100ms ease;
-}
-
-.button:not(:empty):hover {
-  background-color: rgba(0,0,0,0.8);
 }
 
 .button:empty:hover {
