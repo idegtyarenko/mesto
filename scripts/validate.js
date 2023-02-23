@@ -1,3 +1,5 @@
+"use strict";
+
 function showInputError (formElement, inputElement, errorMessage, validationParams) {
   const errorElementSelector = '#' + inputElement.name + validationParams.errorIdPostfix;
   const errorElement = formElement.querySelector(errorElementSelector);
