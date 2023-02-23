@@ -55,55 +55,15 @@ const lightboxImage = lightboxPopup.querySelector('.lightbox__image');
 const lightboxCaption = lightboxPopup.querySelector('.lightbox__caption');
 
 
-// Карточки мест
-
-function toggleLike (evt) {
-  evt.stopPropagation();
-  evt.target.classList.toggle('places__like-icon_active');
-}
-
-function deletePlace (evt) {
-  evt.stopPropagation();
-  evt.target.closest('.places__place').remove();
-}
-
-function initPlace (placeElement) {
-  placeElement.querySelector('.places__place').addEventListener('click', openLightbox);
-  placeElement.querySelector('.places__delete-icon').addEventListener('click', deletePlace);
-  placeElement.querySelector('.places__like-icon').addEventListener('click', toggleLike);
-}
-
-function buildPlace (placeObj) {
-  const placeNode = placeTemplate.content.cloneNode(true);
-  placeNode.querySelector('.places__place-photo').src = placeObj.link;
-  placeNode.querySelector('.places__place-photo').alt = 'Фотография места: ' + placeObj.name;
-  placeNode.querySelector('.places__place-name').textContent = placeObj.name;
-  initPlace(placeNode);
-  return placeNode;
-}
-
-function addPlace (placeObj) {
-  places.prepend(buildPlace(placeObj));
-};
-
-function initPlaces (placesArray) {
-  for (const placeObj of placesArray) {
-    addPlace(placeObj);
-  }
-};
-
-initPlaces(initialPlaces);
-
-
 // Попап
 
-function openPopup (popup) {
+const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   page.classList.add('page_popup-opened');
   document.addEventListener("keydown", closePopupOnEscape);
 }
 
-function closePopup (evt, popupNode) {
+const closePopup = (evt, popupNode) => {
   if (evt) {
     evt.stopPropagation();
   }
@@ -113,7 +73,7 @@ function closePopup (evt, popupNode) {
   document.removeEventListener("keydown", closePopupOnEscape);
 };
 
-function setClosePopupClickListeners (popup) {
+const setClosePopupClickListeners = (popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if (evt.currentTarget === evt.target) {
       closePopup(evt);
@@ -124,13 +84,13 @@ function setClosePopupClickListeners (popup) {
   }
 }
 
-function closePopupOnEscape (evt) {
+const closePopupOnEscape = (evt) => {
   if("key" in evt && (evt.key === "Escape" || evt.key === "Esc")){
     closePopup(null, document.querySelector('.popup_opened'));
   }
 }
 
-function initPopups () {
+const initPopups = () => {
   for (const popup of popups) {
     setClosePopupClickListeners(popup);
   }
@@ -141,7 +101,7 @@ initPopups();
 
 // Открытие лайтбокса
 
-function openLightbox (evt) {
+const openLightbox = (evt) => {
   const name = evt.target.closest('.places__place').querySelector('.places__place-name').textContent;
   const src = evt.target.closest('.places__place').querySelector('.places__place-photo').src;
   lightboxImage.src = src;
@@ -149,6 +109,46 @@ function openLightbox (evt) {
   lightboxCaption.textContent = name;
   openPopup(lightboxPopup);
 };
+
+
+// Карточки мест
+
+const toggleLike = (evt) => {
+  evt.stopPropagation();
+  evt.target.classList.toggle('places__like-icon_active');
+}
+
+const deletePlace = (evt) => {
+  evt.stopPropagation();
+  evt.target.closest('.places__place').remove();
+}
+
+const initPlace = (placeElement) => {
+  placeElement.querySelector('.places__place').addEventListener('click', openLightbox);
+  placeElement.querySelector('.places__delete-icon').addEventListener('click', deletePlace);
+  placeElement.querySelector('.places__like-icon').addEventListener('click', toggleLike);
+}
+
+const buildPlace = (placeObj) => {
+  const placeNode = placeTemplate.content.cloneNode(true);
+  placeNode.querySelector('.places__place-photo').src = placeObj.link;
+  placeNode.querySelector('.places__place-photo').alt = 'Фотография места: ' + placeObj.name;
+  placeNode.querySelector('.places__place-name').textContent = placeObj.name;
+  initPlace(placeNode);
+  return placeNode;
+}
+
+const addPlace = (placeObj) => {
+  places.prepend(buildPlace(placeObj));
+};
+
+const initPlaces = (placesArray) => {
+  for (const placeObj of placesArray) {
+    addPlace(placeObj);
+  }
+};
+
+initPlaces(initialPlaces);
 
 
 // Объявление форм
@@ -185,7 +185,7 @@ const forms = {
 
 // Открытие форм
 
-function addFormOpenListeners () {
+const addFormOpenListeners = () => {
   for (const formElement of document.forms) {
     const formDescription = forms[formElement.name];
     document.querySelector(formDescription.openingElementSelector).addEventListener('click', () => {

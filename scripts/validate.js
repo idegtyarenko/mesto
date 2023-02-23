@@ -1,19 +1,19 @@
 "use strict";
 
-function showInputError (formElement, inputElement, errorMessage, validationParams) {
+const showInputError = (formElement, inputElement, errorMessage, validationParams) => {
   const errorElementSelector = '#' + inputElement.name + validationParams.errorIdPostfix;
   const errorElement = formElement.querySelector(errorElementSelector);
   inputElement.classList.add(validationParams.inputErrorClass);
   errorElement.textContent = errorMessage;
 }
 
-function hideInputError (formElement, inputElement, validationParams) {
+const hideInputError = (formElement, inputElement, validationParams) => {
   const errorElement = formElement.querySelector('#' + inputElement.name + validationParams.errorIdPostfix);
   inputElement.classList.remove(validationParams.inputErrorClass);
   errorElement.textContent = '';
 }
 
-function checkInputValidity (formElement, inputElement, validationParams) {
+const checkInputValidity = (formElement, inputElement, validationParams) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, validationParams);
   } else {
@@ -21,13 +21,13 @@ function checkInputValidity (formElement, inputElement, validationParams) {
   }
 }
 
-function hasInvalidInput (inputList) {
+const hasInvalidInput = (inputList) => {
   return inputList.some(input => {
     return !input.validity.valid;
   });
 }
 
-function toggleButtonState (inputList, buttonElement, validationParams) {
+const toggleButtonState = (inputList, buttonElement, validationParams) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(validationParams.inactiveButtonClass);
   } else {
@@ -35,7 +35,7 @@ function toggleButtonState (inputList, buttonElement, validationParams) {
   }
 }
 
-function setValidationListeners (formElement, validationParams) {
+const setValidationListeners = (formElement, validationParams) => {
   const inputList = Array.from(formElement.querySelectorAll(validationParams.inputSelector));
   const buttonElement = formElement.querySelector(validationParams.submitButtonSelector);
   toggleButtonState(inputList, buttonElement, validationParams);
@@ -47,7 +47,7 @@ function setValidationListeners (formElement, validationParams) {
   }
 }
 
-function enableValidation (validationParams) {
+const enableValidation = (validationParams) => {
   for (const formElement of document.forms) {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
