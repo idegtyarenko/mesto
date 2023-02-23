@@ -101,7 +101,7 @@ function closePopup (evt, popupNode) {
   page.classList.remove('page_popup-opened');
 };
 
-function initPopups () {
+function setClosePopupClickListeners () {
   for (const popup of popups) {
     popup.addEventListener('mousedown', (evt) => {
       if (evt.currentTarget === evt.target) {
@@ -112,11 +112,19 @@ function initPopups () {
       element.addEventListener('click', closePopup);
     }
   }
+}
+
+function setClosePopupKeyboardListener () {
   document.addEventListener ("keydown", evt => {
     if("key" in evt && (evt.key === "Escape" || evt.key === "Esc")){
       closePopup(null, document.querySelector('.popup_opened'));
     }
   });
+}
+
+function initPopups () {
+  setClosePopupClickListeners();
+  setClosePopupKeyboardListener();
 };
 
 initPopups();
