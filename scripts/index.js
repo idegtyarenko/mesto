@@ -124,7 +124,7 @@ const deletePlace = (evt) => {
 }
 
 const initPlace = (placeElement) => {
-  placeElement.querySelector('.places__place').addEventListener('click', openLightbox);
+  placeElement.querySelector('.places__place-photo').addEventListener('click', openLightbox);
   placeElement.querySelector('.places__delete-icon').addEventListener('click', deletePlace);
   placeElement.querySelector('.places__like-icon').addEventListener('click', toggleLike);
 }
