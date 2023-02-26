@@ -63,30 +63,23 @@ const openPopup = (popup) => {
   document.addEventListener("keydown", closePopupOnEscape);
 }
 
-const closePopup = (evt, popupNode) => {
-  if (evt) {
-    evt.stopPropagation();
-  }
-  const popup = evt ? evt.target.closest('.popup') : popupNode;
-  popup.classList.remove('popup_opened');
+const closePopup = (popupNode) => {
+  popupNode.classList.remove('popup_opened');
   page.classList.remove('page_popup-opened');
   document.removeEventListener("keydown", closePopupOnEscape);
 };
 
 const setClosePopupClickListeners = (popup) => {
   popup.addEventListener('mousedown', (evt) => {
-    if (evt.currentTarget === evt.target) {
-      closePopup(evt);
+    if (evt.currentTarget === evt.target || evt.target.classList.contains('popup__close')) {
+      closePopup(evt.target.closest('.popup'));
     }
   });
-  for (const element of popup.querySelectorAll('.popup__close')) {
-    element.addEventListener('click', closePopup);
-  }
 }
 
 const closePopupOnEscape = (evt) => {
-  if("key" in evt && (evt.key === "Escape" || evt.key === "Esc")){
-    closePopup(null, document.querySelector('.popup_opened'));
+  if("key" in evt && (evt.key === "Escape")){
+    closePopup(document.querySelector('.popup_opened'));
   }
 }
 

@@ -52,7 +52,7 @@ const enableValidation = (validationParams) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
       forms[formElement.name].submitFunction();
-      closePopup(evt);
+      closePopup(evt.target.closest('.popup'));
     })
     setValidationListeners(formElement, validationParams);
   }
