@@ -14,13 +14,13 @@ const showInputError = (formElement, inputElement, errorMessage, validationParam
   const errorElement = formElement.querySelector(errorElementSelector);
   inputElement.classList.add(validationParams.inputErrorClass);
   errorElement.textContent = errorMessage;
-}
+};
 
 const hideInputError = (formElement, inputElement, validationParams) => {
   const errorElement = formElement.querySelector('#' + inputElement.name + validationParams.errorIdPostfix);
   inputElement.classList.remove(validationParams.inputErrorClass);
   errorElement.textContent = '';
-}
+};
 
 const checkInputValidity = (formElement, inputElement, validationParams) => {
   if (!inputElement.validity.valid) {
@@ -28,7 +28,7 @@ const checkInputValidity = (formElement, inputElement, validationParams) => {
   } else {
     hideInputError(formElement, inputElement, validationParams);
   }
-}
+};
 
 const clearFormErrors = (formElement) => {
   for (const field of formElement.querySelectorAll('.form__field')) {
@@ -41,7 +41,7 @@ const hasInvalidInput = (inputList) => {
   return inputList.some(input => {
     return !input.validity.valid;
   });
-}
+};
 
 const toggleButtonState = (inputList, buttonElement, validationParams) => {
   if (hasInvalidInput(inputList)) {
@@ -49,7 +49,7 @@ const toggleButtonState = (inputList, buttonElement, validationParams) => {
   } else {
     buttonElement.classList.remove(validationParams.inactiveButtonClass);
   }
-}
+};
 
 const setValidationListeners = (formElement, validationParams) => {
   const inputList = Array.from(formElement.querySelectorAll(validationParams.inputSelector));
@@ -61,7 +61,7 @@ const setValidationListeners = (formElement, validationParams) => {
       toggleButtonState(inputList, buttonElement, validationParams);
     })
   }
-}
+};
 
 const enableValidation = (validationParams) => {
   for (const formElement of document.forms) {
@@ -72,6 +72,6 @@ const enableValidation = (validationParams) => {
     })
     setValidationListeners(formElement, validationParams);
   }
-}
+};
 
 enableValidation(validationParams);

@@ -53,7 +53,7 @@ const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   page.classList.add('page_popup-opened');
   document.addEventListener("keydown", closePopupOnEscape);
-}
+};
 
 const closePopup = (popupNode) => {
   popupNode.classList.remove('popup_opened');
@@ -68,13 +68,13 @@ const setClosePopupClickListeners = (popup) => {
       closePopup(evt.target.closest('.popup'));
     }
   });
-}
+};
 
 const closePopupOnEscape = (evt) => {
   if("key" in evt && (evt.key === "Escape")){
     closePopup(document.querySelector('.popup_opened'));
   }
-}
+};
 
 const initPopups = () => {
   for (const popup of popups) {
@@ -102,18 +102,18 @@ const openLightbox = (evt) => {
 const toggleLike = (evt) => {
   evt.stopPropagation();
   evt.target.classList.toggle('places__like-icon_active');
-}
+};
 
 const deletePlace = (evt) => {
   evt.stopPropagation();
   evt.target.closest('.places__place').remove();
-}
+};
 
 const initPlace = (placeElement) => {
   placeElement.querySelector('.places__place-photo').addEventListener('click', openLightbox);
   placeElement.querySelector('.places__delete-icon').addEventListener('click', deletePlace);
   placeElement.querySelector('.places__like-icon').addEventListener('click', toggleLike);
-}
+};
 
 const buildPlace = (placeObj) => {
   const placeNode = placeTemplate.content.cloneNode(true);
@@ -122,7 +122,7 @@ const buildPlace = (placeObj) => {
   placeNode.querySelector('.places__place-name').textContent = placeObj.name;
   initPlace(placeNode);
   return placeNode;
-}
+};
 
 const addPlace = (placeObj) => {
   places.prepend(buildPlace(placeObj));
@@ -166,7 +166,7 @@ const forms = {
       });
     }
   }
-}
+};
 
 
 // Открытие форм
@@ -180,6 +180,6 @@ const addFormOpenListeners = () => {
       formDescription.popupElement.querySelector('.form__input').focus();
     });
   }
-}
+};
 
 addFormOpenListeners();
