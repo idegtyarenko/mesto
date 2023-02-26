@@ -1,0 +1,7 @@
+.form__field {
+  position: relative;
+}
+
+.form__field:last-of-type {
+  flex-grow: 1;
+}

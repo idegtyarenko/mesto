@@ -1,12 +1,10 @@
 .form__input-error {
+  position: absolute;
+  top: 42px;
   margin: 0;
   color: red;
   font-size: 12px;
   line-height: 14px;
   min-height: 14px;
-  margin-bottom: 10px;
-}
-
-.form__input-error:last-of-type {
-  flex-grow: 1;
+  z-index: 3;
 }
