@@ -1,5 +1,14 @@
 "use strict";
 
+const validationParams = {
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonClass: 'button_state_disabled',
+  inputErrorClass: 'form__input_state_invalid',
+  errorTextSelector: '.form__input-error',
+  errorIdPostfix: '-error'
+};
+
 const showInputError = (formElement, inputElement, errorMessage, validationParams) => {
   const errorElementSelector = '#' + inputElement.name + validationParams.errorIdPostfix;
   const errorElement = formElement.querySelector(errorElementSelector);
@@ -20,6 +29,13 @@ const checkInputValidity = (formElement, inputElement, validationParams) => {
     hideInputError(formElement, inputElement, validationParams);
   }
 }
+
+const clearFormErrors = (formElement) => {
+  for (const field of formElement.querySelectorAll('.form__field')) {
+    field.querySelector(validationParams.errorTextSelector).textContent = '';
+    field.querySelector('.form__input').classList.remove(validationParams.inputErrorClass);
+  }
+};
 
 const hasInvalidInput = (inputList) => {
   return inputList.some(input => {

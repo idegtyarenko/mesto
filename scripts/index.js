@@ -27,14 +27,6 @@ const initialPlaces = [
   }
 ];
 
-const validationParams = {
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit-button',
-  inactiveButtonClass: 'button_state_disabled',
-  inputErrorClass: 'form__input_state_invalid',
-  errorIdPostfix: '-error'
-};
-
 const page = document.querySelector('.page');
 const profileName = page.querySelector('.profile__name');
 const profileTitle = page.querySelector('.profile__title');
@@ -66,6 +58,7 @@ const openPopup = (popup) => {
 const closePopup = (popupNode) => {
   popupNode.classList.remove('popup_opened');
   page.classList.remove('page_popup-opened');
+  clearFormErrors(popupNode);
   document.removeEventListener("keydown", closePopupOnEscape);
 };
 
@@ -164,7 +157,7 @@ const forms = {
     popupElement: popupAddPlace,
     initFunction: () => {
       formAddPlace.reset();
-      formAddPlaceSubmitButton.classList.add(validationParams.inactiveButtonClass);
+      formAddPlaceSubmitButton.classList.add('button_state_disabled');
     },
     submitFunction: () => {
       addPlace({
