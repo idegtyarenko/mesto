@@ -9,6 +9,15 @@ const validationParams = {
   errorIdPostfix: '-error'
 };
 
+const resetFormValidationState = (formElement) => {
+  for (const field of formElement.querySelectorAll('.form__field')) {
+    field.querySelector(validationParams.errorTextSelector).textContent = '';
+    field.querySelector('.form__input').classList.remove(validationParams.inputErrorClass);
+  }
+  const buttonElement = formElement.querySelector(validationParams.submitButtonSelector);
+  buttonElement.classList.remove(validationParams.inactiveButtonClass);
+};
+
 const showInputError = (formElement, inputElement, errorMessage, validationParams) => {
   const errorElementSelector = '#' + inputElement.name + validationParams.errorIdPostfix;
   const errorElement = formElement.querySelector(errorElementSelector);
@@ -27,13 +36,6 @@ const checkInputValidity = (formElement, inputElement, validationParams) => {
     showInputError(formElement, inputElement, inputElement.validationMessage, validationParams);
   } else {
     hideInputError(formElement, inputElement, validationParams);
-  }
-};
-
-const clearFormErrors = (formElement) => {
-  for (const field of formElement.querySelectorAll('.form__field')) {
-    field.querySelector(validationParams.errorTextSelector).textContent = '';
-    field.querySelector('.form__input').classList.remove(validationParams.inputErrorClass);
   }
 };
 

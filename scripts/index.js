@@ -58,7 +58,7 @@ const openPopup = (popup) => {
 const closePopup = (popupNode) => {
   popupNode.classList.remove('popup_opened');
   page.classList.remove('page_popup-opened');
-  clearFormErrors(popupNode);
+  resetFormValidationState(popupNode);
   document.removeEventListener("keydown", closePopupOnEscape);
 };
 
